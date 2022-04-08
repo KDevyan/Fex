@@ -16,18 +16,16 @@ bot = commands.Bot(command_prefix="!")
         """Set the bot's status."""
         await ctx.bot.change_presence(activity=discord.Game(name=text))
 
-    @bot.command()
+    @commands.command()
     async def test(ctx):
         p = {ctx.author.mention}
         await ctx.send("Pong! {p} ms")
 
     @commands.Cog.listener()
     async def on_member_join(self, member: discord.Member):
-        channel = self.bot.get_channel(941682534843023370)
-
+       channel = self.bot.get_channel(941682534843023370)
         if not channel:
             return
-
-        await channel.send(f"Welcome, !")
+        await channel.send('{member.name}, ку')
 
 bot.run("")
