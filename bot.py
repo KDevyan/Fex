@@ -1,10 +1,7 @@
 import discord
 from discord.ext import commands
 
-intents = discord.Intents.default()
-intents.members = True
-
-bot = commands.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix="~", intents=discord.Intents.all())
 
 
 @bot.event
@@ -14,13 +11,11 @@ async def on_ready():
 
 @bot.command(name="ping")
 async def ping(self, ctx: commands.Context):
-    """Get the bot's current websocket latency."""
     await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
 
 
 @bot.command(name="setstatus")
 async def setstatus(ctx: commands.Context, *, text: str):
-    """Set the bot's status."""
     await ctx.bot.change_presence(activity=discord.Game(name=text))
 
 
