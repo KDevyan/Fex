@@ -33,4 +33,4 @@ async def on_member_join(self, member: discord.Member):
     await channel.send(f'{member.name}, ку')
 
 
-bot.run("OTYyMDIxNjU2OTcxMzQxODQ0.YlBefA.DSU2H2NCYx9htxqmYi3pTFj-d88")
+bot.run("")
