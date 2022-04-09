@@ -1,11 +1,13 @@
 import discord
 from discord.ext import commands
 
+
 bot = commands.Bot(command_prefix="~", intents=discord.Intents.all())
 
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(activity=discord.Game("test"))
     print('ready for sex')
 
 
@@ -20,9 +22,8 @@ async def setstatus(ctx: commands.Context, *, text: str):
 
 
 @bot.command()
-async def test(ctx):
-    p = {ctx.author.mention}
-    await ctx.send(f'Pong! {p} ms')
+async def test(ctx, member: discord.Member):
+    await ctx.send(f'helluw, {member.mention}!')
 
 
 @bot.event
