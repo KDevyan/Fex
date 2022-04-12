@@ -1,10 +1,29 @@
 import discord
-from datetime import datetime
-from discord.ext import commands
+import datetime
+from discord.ext import commands, tasks
+from mcstatus import MinecraftServer
 # K.Devyan#0777
 
 
 bot = commands.Bot(command_prefix=">", intents=discord.Intents.all())  # интенты
+
+
+@bot.command()
+async def online(ctx):
+    server = MinecraftServer.lookup("")
+    query = server.query()
+    status = server.status()
+    a = ", ".join(query.players.names)
+    if not a:
+        a = "Сервер пуст!"
+    else:
+        a = ", ".join(query.players.names)
+    embedonline = discord.Embed(title="Онлайн на сервере", color=0x3eebbe)
+    embedonline.add_field(name="Онлайн:", value=f"`{status.players.online}/{status.players.max}`", inline=False)
+    embedonline.add_field(name="Игроки в сети:", value=f"`{a}`", inline=False)
+    embedonline.timestamp = datetime.datetime.utcnow()
+    embedonline.set_footer(text='Furex SMP\u200b')
+    await ctx.reply(embed=embedonline)
 
 
 @bot.event
@@ -14,7 +33,7 @@ async def on_ready():
     print('\n> Vanilla ● SMP\n> Furex SMP запущен\n')  # on ready
 
 
-@bot.command(name="ping")
+@bot.command()
 async def ping(self, ctx: commands.Context):
     await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
 
