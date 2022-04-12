@@ -75,4 +75,4 @@ async def on_member_join(self, member: discord.Member):
     await channel.send(f'{member.name}, привет! Пожалуйста, заполни заявку')  # приветствие
 
 
-bot.run("your token")
+bot.run("your toked")
